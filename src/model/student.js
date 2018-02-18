@@ -19,7 +19,8 @@ class StudentModel extends MyModel{
   }
   register(args){
     return this.runFunction('createNewStudent', {
-      args: args
+      args: [args.passwordHash, args.fullName, args.nationalCode, args.email, args.homeLocation, args.address, args.gender,
+              args.description, args.birthDate, args.postCode, args.birthPlace, true]
     });
 
   }
