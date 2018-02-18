@@ -10,17 +10,15 @@ class MyModel {
     this.dbPrefix = config.application.applicationDBPrefix;
   }
 
-  runFunction(functionName, {any, arguments, returnArg} = {}) {
+  runFunction(functionName, {any, args, returnArg} = {}) {
     if (any) {
-      return this.database.db.any(`SELECT * FROM "
-        ${this.dbPrefix}_${this.name}_${functionName}"
-        (${arguments ? arguments.map((arg, index) => `$${index + 1}`) : ''}) ${returnArg ? `AS "${returnArg}"` : ''}`
-        , arguments ? arguments : undefined);
+      return this.database.db.func(
+        `"${this.dbPrefix}_${this.name}_${functionName}"`
+        , args ? args : undefined);
     }
-    return this.database.db.oneOrNone(`SELECT * FROM "
-        ${this.dbPrefix}_${this.name}_${functionName}"
-        (${arguments ? arguments.map((arg, index) => `$${index + 1}`) : ''}) ${returnArg ? `AS "${returnArg}"` : ''}`
-      , arguments ? arguments : undefined);
+    return this.database.db.func(
+      `"${this.dbPrefix}_${this.name}_${functionName}"`
+      , args ? args : undefined);
   }
 
   getAll() {
@@ -32,7 +30,7 @@ class MyModel {
   getPage(offset, limit) {
     return this.runFunction('getPage', {
       any: true,
-      arguments: [offset, limit]
+      args: [offset, limit]
     });
   }
 
@@ -42,7 +40,7 @@ class MyModel {
 
   deleteById(id) {
     return this.runFunction('delete', {
-      arguments: [id],
+      args: [id],
       returnArg: 'affectedRows'
     });
   }
