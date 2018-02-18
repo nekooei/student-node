@@ -31,7 +31,14 @@ export default ({config, database}) => {
 
   });
 
-
+  api.post('/register', BodyParser.registerSchema(), async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.send(ResponseGenerator(false, "Validation Error", errors.mapped()));
+    }
+    const registerInfo = await studentProviderInstance.register(req.body);
+    res.send(registerInfo);
+  });
 
   return api;
 }
