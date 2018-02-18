@@ -14,9 +14,16 @@ class StudentModel extends MyModel{
 
   findByNationalCode(nationalCode){
     return this.runFunction('findByNationalCode',{
-      arguments: [nationalCode]
+      args: [nationalCode]
     });
   }
+  register(args){
+    return this.runFunction('createNewStudent', {
+      args: args
+    });
+
+  }
+
 
 
 }
