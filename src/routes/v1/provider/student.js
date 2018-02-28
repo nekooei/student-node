@@ -23,6 +23,10 @@ class StudentProvider {
     return this.model.register(information);
 
   }
+
+  getPasswordHash(nationalCode){
+    return this.model.getPasswordHash(nationalCode);
+  }
 }
 
 
