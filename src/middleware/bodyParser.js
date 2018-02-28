@@ -29,3 +29,15 @@ export const registerSchema = () => [
   check('postCode').trim().isLength({min: 10, max: 10}),
   check('birthPlace').trim()
 ];
+
+export const loginSchema = () => [
+  check('nationalCode', 'National Code cannot be empty').isLength({
+    min: 10,
+    max: 10
+  }).withMessage('Invalid National Code'),
+  check('password', 'Must to set password')
+    .isLength({min: 5})
+    .withMessage('Password must have more than 5 characters')
+    .matches(/\d/)
+    .withMessage('Password must have minimum one digit')
+];
