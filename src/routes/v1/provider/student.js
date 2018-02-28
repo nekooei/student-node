@@ -13,7 +13,7 @@ class StudentProvider {
     return this.model.findByNationalCode(nationalCode);
   }
   register({password, fullName, nationalCode, email, homeLocation
-             , address, gender, description, birthDate, postCode, birthPlace}) {
+             , address, gender, description, birthDate, postCode, birthPlace, phoneNumber, mobileNumber}) {
     let information = arguments[0];
     information = {
       ...information,
