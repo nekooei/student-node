@@ -25,6 +25,11 @@ class StudentModel extends MyModel{
 
   }
 
+  getPasswordHash(nationalCode){
+    return this.runFunction('getPasswordHash', {
+      args : [nationalCode]
+    });
+  }
 
 
 }
