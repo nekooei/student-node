@@ -27,6 +27,10 @@ class StudentProvider {
   getPasswordHash(nationalCode){
     return this.model.getPasswordHash(nationalCode);
   }
+
+  getStudentByNationalCode(nationalCode){
+    return this.model.findByNationalCode(nationalCode);
+  }
 }
 
 
