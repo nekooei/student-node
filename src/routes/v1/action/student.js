@@ -41,7 +41,8 @@ export default ({config, database}) => {
     res.send(registerInfo);
   });
 
-  api.post('/login', authMiddleWare.AuthenticationWitCustomMessage
+  api.post('/login', BodyParser.loginSchema()
+    , authMiddleWare.AuthenticationWitCustomMessage
     , authMiddleWare.generateAccessToken
     , authMiddleWare.respond);
 
