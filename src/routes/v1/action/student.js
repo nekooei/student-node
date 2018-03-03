@@ -6,6 +6,7 @@ import {validationResult} from "express-validator/check";
 import * as BodyParser from "../../../middleware/bodyParser";
 import StudentProvider from "../provider/student";
 import ResponseGenerator from "../../../util/responseGenerator";
+import authMiddleWare from '../../../middleware/authentication';
 
 export default ({config, database}) => {
   let api = new Router();
@@ -39,6 +40,10 @@ export default ({config, database}) => {
     const registerInfo = await studentProviderInstance.register(req.body);
     res.send(registerInfo);
   });
+
+  api.post('/login', authMiddleWare.AuthenticationWitCustomMessage
+    , authMiddleWare.generateAccessToken
+    , authMiddleWare.respond);
 
   return api;
 }
