@@ -25,7 +25,7 @@ export default ({config, database}) => {
     }
     const registerInfo = await studentProviderInstance.checkRegistration(req.body.nationalCode);
     if (registerInfo.length !== 0) {
-      res.send(ResponseGenerator(true, "You Can Login", registerInfo));
+      res.send(ResponseGenerator(true, "You Can Login", registerInfo[0]));
     } else {
       res.send(ResponseGenerator(false, "You Must Register First"));
     }
