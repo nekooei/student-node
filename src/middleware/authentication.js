@@ -4,6 +4,8 @@
 import jwt from 'jsonwebtoken';
 import expressjwt from 'express-jwt';
 import passport from 'passport';
+import ResponseGenerator from "../util/responseGenerator";
+
 
 const TOKEN_TIME = 7 * 24 * 60 * 60;
 const SECRET = 'sagepireCSEHAM3MIDONanKi3!!!!!!!';
@@ -23,21 +25,20 @@ let generateAccessToken = (req, res, next) => {
 };
 
 let respond = (req, res) => {
-  res.status(200)
-    .json({
-      id: req.user.id,
-      nationalCode: req.user.nationalCode,
-      token : req.token
-    });
+  res.send(ResponseGenerator(true, "Login Successful", {
+    id: req.user.id,
+    nationalCode: req.user.nationalCode,
+    token : req.token
+  }));
 };
 
-let customAuthenticateMessage = (req, res, next) =>{
+let AuthenticationWitCustomMessage = (req, res, next) =>{
   return passport.authenticate('local', {
     session: false,
     scope: []
   }, (error, thisModel, authError) => {
     if(authError){
-      return res.status(401).send(authError);
+      return res.send(ResponseGenerator(false, authError.message));
     }
     req.user= thisModel;
     next();
@@ -48,5 +49,5 @@ export default  {
   authenticate,
   generateAccessToken,
   respond,
-  customAuthenticateMessage
+  AuthenticationWitCustomMessage
 }
