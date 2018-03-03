@@ -13,7 +13,6 @@ const SECRET = 'sagepireCSEHAM3MIDONanKi3!!!!!!!';
 let authenticate = expressjwt({secret: SECRET});
 
 let generateAccessToken = (req, res, next) => {
-  console.log(req.user);
   req.token = req.token || {};
   req.token = jwt.sign({
     id: req.user.id,
