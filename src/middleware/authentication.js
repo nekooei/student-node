@@ -3,6 +3,7 @@
  */
 import jwt from 'jsonwebtoken';
 import expressjwt from 'express-jwt';
+import {validationResult} from "express-validator/check";
 import passport from 'passport';
 import ResponseGenerator from "../util/responseGenerator";
 
@@ -32,6 +33,10 @@ let respond = (req, res) => {
 };
 
 let AuthenticationWitCustomMessage = (req, res, next) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.send(ResponseGenerator(false, "Validation Error", errors.mapped()));
+  }
   return passport.authenticate('local', {
     session: false,
     scope: []
