@@ -46,5 +46,9 @@ export default ({config, database}) => {
     , authMiddleWare.generateAccessToken
     , authMiddleWare.respond);
 
+  api.get('/checkToken', authMiddleWare.authenticate, (req, res) => {
+    res.send(ResponseGenerator(true, "Token is valid.", req.user));
+  });
+
   return api;
 }
