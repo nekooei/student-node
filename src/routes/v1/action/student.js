@@ -50,5 +50,10 @@ export default ({config, database}) => {
     res.send(ResponseGenerator(true, "Token is valid.", req.user));
   });
 
+  api.get('/schools', authMiddleWare.authenticate, async (req, res) => {
+    const schools = await studentProviderInstance.getAllAvailableSchool();
+    res.send(ResponseGenerator(true, 'All Schools', schools));
+  });
+
   return api;
 }
