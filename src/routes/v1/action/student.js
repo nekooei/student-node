@@ -55,5 +55,10 @@ export default ({config, database}) => {
     res.send(ResponseGenerator(true, 'All Schools', schools));
   });
 
+  api.get('/school/:schoolId/openTerm', authMiddleWare.authenticate, async (req, res) => {
+    const openTerm = await studentProviderInstance.getOpenTermOfSchool(req.params.schoolId);
+    res.send(ResponseGenerator(true, 'Open Term', openTerm));
+  });
+
   return api;
 }
