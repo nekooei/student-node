@@ -3,6 +3,7 @@
  */
 import StudentModel from '../../../model/student';
 import * as Encryption  from '../../../util/encryption';
+import JMoment from 'jalali-moment';
 
 class StudentProvider {
   constructor(database){
@@ -34,6 +35,11 @@ class StudentProvider {
 
   getAllAvailableSchool(){
     return this.model.getAvailabeSchools();
+  }
+
+
+  getOpenTermOfSchool(schoolId){
+   return this.model.getOpenEnrollTermOfSchool(schoolId, JMoment(Date.now()).format('jYYYYjMMjDD'));
   }
 }
 
