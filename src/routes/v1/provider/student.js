@@ -31,6 +31,10 @@ class StudentProvider {
   getStudentByNationalCode(nationalCode){
     return this.model.findByNationalCode(nationalCode);
   }
+
+  getAllAvailableSchool(){
+    return this.model.getAvailabeSchools();
+  }
 }
 
 
