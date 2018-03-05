@@ -60,5 +60,10 @@ export default ({config, database}) => {
     res.send(ResponseGenerator(true, 'Open Term', openTerm));
   });
 
+  api.get('/:termId/termGroup', authMiddleWare.authenticate, async (req, res) => {
+    const termGroups = await studentProviderInstance.getTermGroups(req.params.termId);
+    res.send(ResponseGenerator(true, 'Term Groups', termGroups));
+  });
+
   return api;
 }

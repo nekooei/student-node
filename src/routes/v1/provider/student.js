@@ -37,9 +37,12 @@ class StudentProvider {
     return this.model.getAvailabeSchools();
   }
 
-
   getOpenTermOfSchool(schoolId){
    return this.model.getOpenEnrollTermOfSchool(schoolId, JMoment(Date.now()).format('jYYYYjMMjDD'));
+  }
+
+  getTermGroups(termId){
+    return this.model.getTermGroups(termId);
   }
 }
 

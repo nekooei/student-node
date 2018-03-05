@@ -41,6 +41,12 @@ class StudentModel extends MyModel{
     });
   }
 
+  getTermGroups(termId){
+    return this.runFunction('crm', 'termGroup', 'getAllByTermId', {
+      args : [termId]
+    });
+  }
+
 
 }
 
