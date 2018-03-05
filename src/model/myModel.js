@@ -7,13 +7,12 @@ class MyModel {
   constructor({name, database}) {
     this.name = name;
     this.database = database;
-    this.dbPrefix = config.application.applicationDBPrefix;
   }
 
-  runFunction(functionName, {any, args, returnArg} = {}) {
+  runFunction(dbPrefix, functionName, {any, args, returnArg} = {}) {
     if (any) {
       return this.database.db.func(
-        `"${this.dbPrefix}_${this.name}_${functionName}"`
+        `"${dbPrefix}_${this.name}_${functionName}"`
         , args ? args : undefined);
     }
     return this.database.db.func(
@@ -22,13 +21,13 @@ class MyModel {
   }
 
   getAll() {
-    return this.runFunction('getAll', {
+    return this.runFunction('crm', 'getAll', {
       any: true
     });
   }
 
   getPage(offset, limit) {
-    return this.runFunction('getPage', {
+    return this.runFunction('crm', 'getPage', {
       any: true,
       args: [offset, limit]
     });

@@ -13,12 +13,12 @@ class StudentModel extends MyModel{
   }
 
   findByNationalCode(nationalCode){
-    return this.runFunction('findByNationalCode',{
+    return this.runFunction('crm','findByNationalCode',{
       args: [nationalCode]
     });
   }
   register(args){
-    return this.runFunction('createNewStudent', {
+    return this.runFunction('crm', 'createNewStudent', {
       args: [args.passwordHash, args.fullName, args.nationalCode, args.email, args.homeLocation, args.address, args.gender,
               args.description, args.birthDate, args.postCode, args.birthPlace, true, args.phoneNumber, args.mobileNumber]
     });
@@ -26,7 +26,7 @@ class StudentModel extends MyModel{
   }
 
   getPasswordHash(nationalCode){
-    return this.runFunction('getPasswordHash', {
+    return this.runFunction('crm', 'getPasswordHash', {
       args : [nationalCode]
     });
   }
