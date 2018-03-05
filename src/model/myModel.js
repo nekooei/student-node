@@ -9,25 +9,20 @@ class MyModel {
     this.database = database;
   }
 
-  runFunction(dbPrefix, functionName, {any, args, returnArg} = {}) {
-    if (any) {
+  runFunction(dbPrefix, entityName, functionName, {any, args, returnArg} = {}) {
       return this.database.db.func(
-        `"${dbPrefix}_${this.name}_${functionName}"`
+        `"${dbPrefix}_${entityName}_${functionName}"`
         , args ? args : undefined);
-    }
-    return this.database.db.func(
-      `"${this.dbPrefix}_${this.name}_${functionName}"`
-      , args ? args : undefined);
   }
 
   getAll() {
-    return this.runFunction('crm', 'getAll', {
+    return this.runFunction('crm', this.name, 'getAll', {
       any: true
     });
   }
 
   getPage(offset, limit) {
-    return this.runFunction('crm', 'getPage', {
+    return this.runFunction('crm', this.name, 'getPage', {
       any: true,
       args: [offset, limit]
     });
@@ -38,7 +33,7 @@ class MyModel {
   }
 
   deleteById(id) {
-    return this.runFunction('delete', {
+    return this.runFunction('crm', this.name,'delete', {
       args: [id],
       returnArg: 'affectedRows'
     });
