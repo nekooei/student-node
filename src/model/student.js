@@ -35,6 +35,12 @@ class StudentModel extends MyModel{
     return this.runFunction('crm', 'school', 'getAll');
   }
 
+  getOpenEnrollTermOfSchool(schoolId, currentDate){
+    return this.runFunction('crm', 'schoolTerm', 'findOneOpenEnrolmentSchoolTermBySchoolId', {
+      args: [schoolId, currentDate]
+    });
+  }
+
 
 }
 
