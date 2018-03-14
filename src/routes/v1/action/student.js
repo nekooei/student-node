@@ -117,10 +117,10 @@ export default ({config, database}) => {
      school: schoolInformation[0].caption,
      priceUnit : priceUnit.price,
      startDate : termGroup.startDate,
-     GroupCaption: termGroup.caption,
+     groupCaption: termGroup.caption,
      endDate: termGroup.endDate,
      sessionCount: termGroup.sessionsCount,
-     totalPrice : (termGroup.sessionsCount * 2) * priceUnit.price
+     totalPrice : ((termGroup.sessionsCount * 2) * priceUnit.price) * req.body.distance
    };
    res.send(ResponseGenerator(true, 'Service Price Review', response))
  });
