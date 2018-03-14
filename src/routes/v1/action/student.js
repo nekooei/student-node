@@ -81,7 +81,7 @@ export default ({config, database}) => {
  api.get('/:schoolId/distance', authMiddleWare.authenticate, async (req, res) => {
    try{
      const userInfo = await studentProviderInstance.getStudentInfo(req.user.id);
-     const schoolInfo = await  studentProviderInstance.getScholl(req.params.schoolId);
+     const schoolInfo = await  studentProviderInstance.getSchool(req.params.schoolId);
      if(schoolInfo.length === 0 ){
        res.send(ResponseGenerator(false, "School Invalid"));
        return;

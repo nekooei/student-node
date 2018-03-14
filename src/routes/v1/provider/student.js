@@ -41,7 +41,7 @@ class StudentProvider {
    return this.model.getOpenEnrollTermOfSchool(schoolId, JMoment(Date.now()).format('jYYYYjMMjDD'));
   }
 
-  getScholl(schoolId){
+  getSchool(schoolId){
     return this.model.getSchoolBySchoolId(schoolId);
   }
 
