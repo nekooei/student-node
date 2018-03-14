@@ -29,7 +29,7 @@ class MyModel {
   }
 
   getById(id) {
-    return this.database.db.one(`SELECT * FROM ${this.name} where id = ${id}`);
+    return this.database.db.one(`SELECT * FROM ${this.name}s where id = ${id}`);
   }
 
   deleteById(id) {

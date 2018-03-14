@@ -41,8 +41,24 @@ class StudentProvider {
    return this.model.getOpenEnrollTermOfSchool(schoolId, JMoment(Date.now()).format('jYYYYjMMjDD'));
   }
 
+  getScholl(schoolId){
+    return this.model.getSchoolBySchoolId(schoolId);
+  }
+
   getTermGroups(termId){
     return this.model.getTermGroups(termId);
+  }
+
+  getStudentInfo(studentId){
+    return this.model.getById(studentId);
+  }
+
+  async createServiceRequest(serviceRequestInfo){
+    const studentInfo = await this.getStudentInfo(serviceRequestInfo.studentId);
+    this.getStudentInfo(serviceRequestInfo.studentId);
+    serviceRequestInfo.homeLocation = `(${studentInfo.homeLocation.x},${studentInfo.homeLocation.y})`;
+    serviceRequestInfo.address = studentInfo.address;
+    return this.model.createServiceRequest(serviceRequestInfo);
   }
 }
 

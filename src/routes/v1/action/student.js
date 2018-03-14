@@ -7,6 +7,9 @@ import * as BodyParser from "../../../middleware/bodyParser";
 import StudentProvider from "../provider/student";
 import ResponseGenerator from "../../../util/responseGenerator";
 import authMiddleWare from '../../../middleware/authentication';
+import DistanceMatrix from 'google-distance-matrix';
+
+const DISTANCE_MATRIX_API_KEY = 'AIzaSyAJRlHVa45YqX-0chPm5Y7JDiaplMIQMOM';
 
 export default ({config, database}) => {
   let api = new Router();
@@ -30,6 +33,11 @@ export default ({config, database}) => {
       res.send(ResponseGenerator(false, "You Must Register First"));
     }
 
+  });
+
+  api.get('/info', authMiddleWare.authenticate, async(req, res) => {
+    const studentInfo = await studentProviderInstance.getStudentInfo(req.user.id);
+    res.send(ResponseGenerator(true, 'Student Info', studentInfo));
   });
 
   api.post('/register', BodyParser.registerSchema(), async (req, res) => {
@@ -57,12 +65,54 @@ export default ({config, database}) => {
 
   api.get('/school/:schoolId/openTerm', authMiddleWare.authenticate, async (req, res) => {
     const openTerm = await studentProviderInstance.getOpenTermOfSchool(req.params.schoolId);
-    res.send(ResponseGenerator(true, 'Open Term', openTerm));
+    if(openTerm.length !== 0 ){
+      res.send(ResponseGenerator(true, 'Open Term', openTerm[0]));
+    }else {
+      res.send(ResponseGenerator(false, 'No Open Term Available'));
+    }
+
   });
 
   api.get('/:termId/termGroup', authMiddleWare.authenticate, async (req, res) => {
     const termGroups = await studentProviderInstance.getTermGroups(req.params.termId);
     res.send(ResponseGenerator(true, 'Term Groups', termGroups));
+  });
+
+ api.get('/:schoolId/distance', authMiddleWare.authenticate, async (req, res) => {
+   try{
+     const userInfo = await studentProviderInstance.getStudentInfo(req.user.id);
+     const schoolInfo = await  studentProviderInstance.getScholl(req.params.schoolId);
+     if(schoolInfo.length === 0 ){
+       res.send(ResponseGenerator(false, "School Invalid"));
+       return;
+     }
+     const origin = [`${userInfo.homeLocation.x},${userInfo.homeLocation.y}`];
+     const destination = [`${schoolInfo[0].geoLocation.x},${schoolInfo[0].geoLocation.y}`];
+     DistanceMatrix.key(DISTANCE_MATRIX_API_KEY);
+     DistanceMatrix.matrix(origin, destination, (err, distance) => {
+      if(err){
+        res.send(ResponseGenerator(false, err.message, err));
+        return;
+      }
+      if(distance.status === 'OK'){
+        const responseData = {
+          distanceMeter : distance.rows[0].elements[0].distance.value,
+          distanceText : distance.rows[0].elements[0].distance.text,
+        };
+        res.send(ResponseGenerator(true, "distances", responseData));
+      }else {
+        res.send(ResponseGenerator(false, 'error in distance'));
+      }
+     });
+   }catch (error){
+     res.send(ResponseGenerator(false, error.message, error));
+   }
+ });
+
+  api.post('/createRequest', authMiddleWare.authenticate, async (req, res) => {
+    req.body.studentId = req.user.id;
+    const result = await studentProviderInstance.createServiceRequest(req.body);
+    res.send(ResponseGenerator(true, 'Create Service', result[0]));
   });
 
   return api;

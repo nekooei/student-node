@@ -47,6 +47,19 @@ class StudentModel extends MyModel{
     });
   }
 
+  createServiceRequest(info){
+    return this.runFunction('student', 'serviceRequest', 'create', {
+      args: [info.studentId, info.termGroupId, info.distance, info.homeLocation, info.address
+        , info.totalPrice, info.discountPrice, info.finalPrice, 'NOT_PAID']
+    });
+  }
+
+  getSchoolBySchoolId(schoolId){
+    return this.runFunction('crm', 'school', 'find', {
+      args : [schoolId]
+    });
+  }
+
 
 }
 
