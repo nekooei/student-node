@@ -53,6 +53,17 @@ class StudentProvider {
     return this.model.getById(studentId);
   }
 
+  async getTermPriceUnit(termId){
+    const termInfo = await this.model.getTermInformation(termId);
+    return termInfo[0].priceUnits[0];
+  }
+
+
+  async getTermGroup(termGroupId){
+    const termGroup = await this.model.getTermGroupById(termGroupId);
+    return termGroup[0];
+  }
+
   async createServiceRequest(serviceRequestInfo){
     const studentInfo = await this.getStudentInfo(serviceRequestInfo.studentId);
     this.getStudentInfo(serviceRequestInfo.studentId);

@@ -109,6 +109,22 @@ export default ({config, database}) => {
    }
  });
 
+ api.post('/servicePrice', authMiddleWare.authenticate, async (req, res) => {
+   const priceUnit = await studentProviderInstance.getTermPriceUnit(req.body.termId);
+   const termGroup = await studentProviderInstance.getTermGroup(req.body.termGroupId);
+   const schoolInformation = await studentProviderInstance.getSchool(req.body.schoolId);
+   const response = {
+     school: schoolInformation[0].caption,
+     priceUnit : priceUnit.price,
+     startDate : termGroup.startDate,
+     GroupCaption: termGroup.caption,
+     endDate: termGroup.endDate,
+     sessionCount: termGroup.sessionsCount,
+     totalPrice : (termGroup.sessionsCount * 2) * priceUnit.price
+   };
+   res.send(ResponseGenerator(true, 'Service Price Review', response))
+ });
+
   api.post('/createRequest', authMiddleWare.authenticate, async (req, res) => {
     req.body.studentId = req.user.id;
     const result = await studentProviderInstance.createServiceRequest(req.body);

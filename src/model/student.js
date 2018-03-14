@@ -47,6 +47,12 @@ class StudentModel extends MyModel{
     });
   }
 
+  getTermGroupById(termGroupId){
+    return this.runFunction('crm', 'termGroup', 'getById', {
+      args: [termGroupId]
+    });
+  }
+
   createServiceRequest(info){
     return this.runFunction('student', 'serviceRequest', 'create', {
       args: [info.studentId, info.termGroupId, info.distance, info.homeLocation, info.address
@@ -57,6 +63,12 @@ class StudentModel extends MyModel{
   getSchoolBySchoolId(schoolId){
     return this.runFunction('crm', 'school', 'find', {
       args : [schoolId]
+    });
+  }
+
+  getTermInformation(termId){
+    return this.runFunction('crm', 'schoolTerm', 'find', {
+      args: [termId]
     });
   }
 
