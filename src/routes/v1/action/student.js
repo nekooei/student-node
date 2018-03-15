@@ -119,6 +119,7 @@ export default ({config, database}) => {
      startDate : termGroup.startDate,
      groupCaption: termGroup.caption,
      endDate: termGroup.endDate,
+     distance: req.body.distance,
      sessionCount: termGroup.sessionsCount,
      totalPrice : ((termGroup.sessionsCount * 2) * priceUnit.price) * req.body.distance
    };
