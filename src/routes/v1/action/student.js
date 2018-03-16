@@ -95,6 +95,10 @@ export default ({config, database}) => {
         return;
       }
       if(distance.status === 'OK'){
+        if(distance.rows[0].elements[0].status === 'ZERO_RESULTS'){
+          res.send(ResponseGenerator(false, 'No Route to destination!'));
+          return;
+        }
         const responseData = {
           distanceMeter : distance.rows[0].elements[0].distance.value,
           distanceText : distance.rows[0].elements[0].distance.text,
