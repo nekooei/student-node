@@ -1,13 +1,13 @@
 /**
  * Created by milad on 10/28/17.
  */
+import 'babel-polyfill';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import ResponseGenerator from './util/responseGenerator';
 import config from './config';
 import routes from './routes';
-import 'babel-polyfill';
 
 let app = express();
 
