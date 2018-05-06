@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "author": "Milad Nekooei <mi.nekooei@gmail.com>",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon -w src --exec \"babel-node src --preset es2015,stage-0\"",
+    "dev": "NODE_ENV=development_student_api nodemon -w src --exec \"babel-node src --preset es2015,stage-0\"",
     "build": "babel src -s -D -d dist --preset es2015,stage-0",
-    "prepublish": "NODE_ENV=PREPUBLISH pm2 start src -x \"babel-node src --preset ex2015, stage-0\"",
-    "start": "NODE_ENV=production pm2 start dist",
+    "start": "NODE_ENV=production_student_api pm2 start dist --name=\"student api\"",
     "prestart": "npm run -s build",
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1"
