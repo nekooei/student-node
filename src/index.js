@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import ResponseGenerator from './util/responseGenerator';
 import config from './config';
 import routes from './routes';
+import 'babel-polyfill';
 
 let app = express();
 
