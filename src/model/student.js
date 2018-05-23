@@ -72,6 +72,18 @@ class StudentModel extends MyModel{
     });
   }
 
+  createPaymentRecord(amount, resNum){
+    return this.runFunction('student', 'serviceRequestPayment', 'create',{
+      args : [resNum, amount]
+    })
+  }
+
+  setTokentForPaymentRequest(paymentId, token){
+    return this.runFunction('student', 'serviceRequestPayment', 'storeToken',{
+      args : [paymentId, token]
+    })
+  }
+
 
 }
 
