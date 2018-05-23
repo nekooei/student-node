@@ -26,7 +26,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg-promise": "^7.4.0",
-    "soap": "^0.23.0"
+    "soap": "^0.23.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
