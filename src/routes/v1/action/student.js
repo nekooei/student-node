@@ -9,6 +9,7 @@ import ResponseGenerator from "../../../util/responseGenerator";
 import authMiddleWare from '../../../middleware/authentication';
 import DistanceMatrix from 'google-distance-matrix';
 import GatewayProvider from "../provider/gateway";
+import ImageProvider from "../provider/image";
 
 const DISTANCE_MATRIX_API_KEY = 'AIzaSyAJRlHVa45YqX-0chPm5Y7JDiaplMIQMOM';
 
@@ -173,6 +174,14 @@ export default ({config, database}) => {
     console.log('body ', req.body);
     console.log('query ', req.query);
     res.send({'hello': ''})
+  });
+
+  api.post('/profileImage', (req, res) => {
+    let imageProvider = new ImageProvider();
+    imageProvider.saveImage(req.body.image, err => {
+      if(err) return res.json(ResponseGenerator(false, 'Failed to save file', {}));
+      res.json(ResponseGenerator(true, 'file created successfully', {}));
+    })
   });
 
   return api;
