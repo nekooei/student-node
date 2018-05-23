@@ -36,9 +36,7 @@ export default class ImageProvider {
       default:
         break;
     }
-    console.log('type & data: ',type, data);
     const fileName = uuid();
-    console.log('fileName', fileName);
     fs.writeFile(`${this.BASE_STUDENT_DIRECTORY_PATH}/${fileName}.${type}`, data, 'base64', (err) => callBack(err, `${this.BASE_STUDENT_DIRECTORY_PATH}/${fileName}.${type}`))
   }
 }
