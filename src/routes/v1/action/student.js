@@ -178,9 +178,9 @@ export default ({config, database}) => {
 
   api.post('/profileImage', (req, res) => {
     let imageProvider = new ImageProvider();
-    imageProvider.saveImage(req.body.image, err => {
+    imageProvider.saveImage(req.body.image, (err, filePath) => {
       if(err) return res.json(ResponseGenerator(false, 'Failed to save file', {}));
-      res.json(ResponseGenerator(true, 'file created successfully', {}));
+      res.json(ResponseGenerator(true, 'file created successfully', {filePath}));
     })
   });
 
