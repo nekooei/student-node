@@ -12,6 +12,12 @@ class GatewayModel extends MyModel{
     return this.runFunction('student', this.name, 'getAll')
   }
 
+  getById(id){
+    return this.runFunction('student', this.name, 'getById',{
+      args: [id]
+    })
+  }
+
 }
 
 export default GatewayModel;
