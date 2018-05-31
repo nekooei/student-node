@@ -91,4 +91,4 @@ class Payir
   }
 }
 
-module.exports = Payir;
+export default Payir;
