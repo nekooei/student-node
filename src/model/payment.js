@@ -37,3 +37,5 @@ class PaymentModel extends MyModel{
 
 
 }
+
+export default PaymentModel;
