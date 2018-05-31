@@ -1,13 +1,13 @@
 /**
  * Created by milad on 3/16/18.
  */
-import StudentModel from "../../../model/student";
+import GatewayModel from "../../../model/gateway";
 import soap from "soap";
 import config from "./gateway.conf";
 
 export default class GatewayProvider {
   constructor(database) {
-    this.model = new StudentModel(database);
+    this.model = new GatewayModel(database);
 
   }
 
@@ -24,6 +24,11 @@ export default class GatewayProvider {
       return paymentInstance;
     }
 
+  }
+
+  async getAllGateways(){
+    const gateways = await this.model.getAllActiveGateways();
+    return gateways;
   }
 
 }
