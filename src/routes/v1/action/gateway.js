@@ -8,6 +8,7 @@ export default ({config, database}) => {
   let api = new Router();
   const gatewayProviderInstance = new GatewayProvider(database);
 
+  //todo : add authentication middleware after all test passed
     api.get('/', async (req, res) => {
       try{
         const gateways = await gatewayProviderInstance.getAllGateways();
