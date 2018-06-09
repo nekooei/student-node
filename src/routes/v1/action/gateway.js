@@ -8,7 +8,7 @@ export default ({config, database}) => {
   let api = new Router();
   const gatewayProviderInstance = new GatewayProvider(database);
 
-  api.get('/', authMiddleWare, async (req, res) => {
+  api.get('/', authMiddleWare.authenticate, async (req, res) => {
     try {
       const gateways = await gatewayProviderInstance.getAllGateways();
       res.json(ResponseGenerator(true, 'gateways', gateways.map(gateway => {
