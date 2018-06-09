@@ -21,7 +21,7 @@ export default ({config, database}) => {
         const factorNum = `${String(Date.now())}-${req.body.amount}-${req.user.id}`;
         const transId = await gatewayHandler.send(req.body.amount, 'http://localhost:65000/v1/payment/verify', factorNum);
         const paymentRecord = await paymentProviderInstance.createNewPayment({...req.body, transId: String(transId), studentId: req.user.id});
-        res.json(ResponseGenerator(true, 'payment', paymentRecord));
+        res.json(ResponseGenerator(true, 'payment', paymentRecord[0]));
 
 
       }
