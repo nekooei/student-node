@@ -10,6 +10,7 @@ import authMiddleWare from '../../../middleware/authentication';
 import DistanceMatrix from 'google-distance-matrix';
 import GatewayProvider from "../provider/gateway";
 import ImageProvider from "../provider/image";
+import PaymentProvider from "../provider/payment";
 
 const DISTANCE_MATRIX_API_KEY = 'AIzaSyAJRlHVa45YqX-0chPm5Y7JDiaplMIQMOM';
 
@@ -151,16 +152,17 @@ export default ({config, database}) => {
     res.send(ResponseGenerator(true, 'Create Service', result[0]));
   });
 
-  api.post('/requestPaymentToken', authMiddleWare.authenticate, async (req, res) => {
+
+  /*api.post('/requestPaymentToken', authMiddleWare.authenticate, async (req, res) => {
     try {
-      const gatewayProviderInstance = new GatewayProvider(database);
-      const tokenRes = await gatewayProviderInstance.requestGatewayToken(req.body.amount * 10, `${String(Date.now())}-${req.body.amount}-${req.user.id}`);
+      const paymentProviderInstance = new PaymentProvider(database);
+      const tokenRes = await paymentProviderInstance.createNewPayment(req.body.amount * 10, `${String(Date.now())}-${req.body.amount}-${req.user.id}`);
       res.send(ResponseGenerator(true, 'Token', tokenRes[0]));
     } catch (error) {
       res.send(error);
     }
 
-  });
+  });*/
 
   api.post('/verify', (req, res) => {
     console.log('params ', req.params);
