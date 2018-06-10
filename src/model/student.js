@@ -84,6 +84,12 @@ class StudentModel extends MyModel{
     })
   }
 
+  chargeCredit(studentId, paymentId){
+    return this.runFunction('student', 'student', 'chargeCreditByPayment', {
+      args: [studentId, paymentId]
+    })
+  }
+
 
 }
 
