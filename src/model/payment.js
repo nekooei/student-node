@@ -33,6 +33,11 @@ class PaymentModel extends MyModel{
     })
   }
 
+  setDetail(transId, detail){
+    return this.runFunction('student', this.name, 'updateDetail', {
+      args: [String(transId), detail]
+    })
+  }
 
 
 
