@@ -80,6 +80,15 @@ class StudentProvider {
       return null;
     }
   }
+
+  async payServiceRequest(serviceRequestId, paymentId){
+    try{
+      const paymentResult = await this.model.payServiceRequest(serviceRequestId, paymentId);
+      return paymentResult;
+    }catch (e) {
+      return null
+    }
+  }
 }
 
 
