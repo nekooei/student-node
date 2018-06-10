@@ -22,4 +22,13 @@ export default class PaymentProvider {
     return verificationRecord.length ? verificationRecord[0] : null;
   }
 
+  async setDetail(transId, detail){
+    try{
+      const updateResult = await this.model.setDetail(transId, detail);
+      return updateResult.length ? updateResult[0] : null;
+    }catch (e) {
+      return null;
+    }
+  }
+
 }
