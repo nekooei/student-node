@@ -17,4 +17,9 @@ export default class PaymentProvider {
     return paymentRecord.length ? paymentRecord[0] : null;
   }
 
+  async verify(transId){
+    const verificationRecord = await this.model.verifyPayment(transId);
+    return verificationRecord.length ? verificationRecord[0] : null;
+  }
+
 }
