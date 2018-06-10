@@ -8,8 +8,13 @@ export default class PaymentProvider {
     this.model = new PaymentModel(database);
   }
 
-  async createNewPayment({gatewayId, amount, transId, serviceRequestId, studentId}){
-    return this.model.createNewPayment(gatewayId, amount, transId, serviceRequestId, studentId);
+  async createNewPayment({gatewayId, amount, transId, serviceRequestId, studentId, factorNum}){
+    return this.model.createNewPayment(gatewayId, amount, transId, serviceRequestId, studentId, factorNum);
+  }
+
+  async getByTransId(transId){
+    const paymentRecord = await this.model.getByTransId(transId);
+    return paymentRecord.length ? paymentRecord[0] : null;
   }
 
 }
