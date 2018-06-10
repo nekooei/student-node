@@ -9,9 +9,9 @@ class PaymentModel extends MyModel{
     });
   }
 
-  createNewPayment(gatewayId, amount, transId, serviceRequestId, studentId){
+  createNewPayment(gatewayId, amount, transId, serviceRequestId, studentId, factorNum){
     return this.runFunction('student', this.name, 'create', {
-      args: [studentId, serviceRequestId, gatewayId, transId,  amount]
+      args: [studentId, serviceRequestId, gatewayId, transId,  amount, factorNum]
     });
   }
 
