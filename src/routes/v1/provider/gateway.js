@@ -33,7 +33,7 @@ export default class GatewayProvider {
 
   async getById(id){
     const gateway = await this.model.getById(id);
-    return gateway;
+    return gateway.length ? gateway[0] : null;
   }
 
 }
