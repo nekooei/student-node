@@ -23,13 +23,13 @@ class PaymentModel extends MyModel{
 
   getByTransId(transId){
     return this.runFunction('student', this.name, 'findByTransId', {
-      args: [transId]
+      args: [String(transId)]
     })
   }
 
   verifyPayment(transId, verify=true){
     return this.runFunction('student', this.name, 'verify', {
-      args: [transId, verify]
+      args: [String(transId), verify]
     })
   }
 
