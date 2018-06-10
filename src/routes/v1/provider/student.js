@@ -71,6 +71,15 @@ class StudentProvider {
     serviceRequestInfo.address = studentInfo.address;
     return this.model.createServiceRequest(serviceRequestInfo);
   }
+
+  async chargeCredit(studentId, paymentId){
+    try {
+      const chargeResult = await this.model.chargeCredit(studentId, paymentId);
+      return chargeResult;
+    }catch (e) {
+      return null;
+    }
+  }
 }
 
 
