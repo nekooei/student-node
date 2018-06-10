@@ -75,7 +75,7 @@ class StudentProvider {
   async chargeCredit(studentId, paymentId){
     try {
       const chargeResult = await this.model.chargeCredit(studentId, paymentId);
-      return chargeResult;
+      return chargeResult.length ? chargeResult[0]['student_student_chargeCreditByPayment'] : null;
     }catch (e) {
       return null;
     }
@@ -84,7 +84,7 @@ class StudentProvider {
   async payServiceRequest(serviceRequestId, paymentId){
     try{
       const paymentResult = await this.model.payServiceRequest(serviceRequestId, paymentId);
-      return paymentResult;
+      return paymentResult.length ? paymentResult[0]['crm_serviceRequest_pricePaid'] : null;
     }catch (e) {
       return null
     }
