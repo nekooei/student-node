@@ -16,5 +16,6 @@ export default {
     port: process.env.PORT,
     applicationDBPrefix : process.env.APPLICATION_DB_PREFIX
   },
-  bodyLimit : '10mb'
+  bodyLimit : '10mb',
+  applicationBaseUrl : process.env.APPLICATION_BASE_URL
 }
