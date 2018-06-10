@@ -90,6 +90,12 @@ class StudentModel extends MyModel{
     })
   }
 
+  payServiceRequest(serviceRequestId, paymentId){
+    return this.runFunction('crm', 'serviceRequest', 'pricePaid', {
+      args: [serviceRequestId, paymentId]
+    });
+  }
+
 
 }
 
