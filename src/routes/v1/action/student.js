@@ -164,19 +164,15 @@ export default ({config, database}) => {
 
   });*/
 
-  api.post('/verify', (req, res) => {
-    console.log('params ', req.params);
-    console.log('body ', req.body);
-    console.log('query ', req.query);
-    res.redirect('http://google.com');
+  api.get('/currentService', authMiddleWare.authenticate, async (req, res) => {
+    const currentService = await studentProviderInstance.getCurrentService(req.user.id);
+    if(currentService !== null){
+      return res.json(ResponseGenerator(true, 'current service', currentService))
+    }else {
+      return res.json(ResponseGenerator(false, 'failed to get current service', {}))
+    }
   });
 
-  api.get('/verify', (req, res) => {
-    console.log('params ', req.params);
-    console.log('body ', req.body);
-    console.log('query ', req.query);
-    res.send({'hello': ''})
-  });
 
   api.post('/profileImage', (req, res) => {
     let imageProvider = new ImageProvider();
