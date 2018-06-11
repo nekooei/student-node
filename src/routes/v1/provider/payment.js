@@ -31,4 +31,13 @@ export default class PaymentProvider {
     }
   }
 
+  async getPayments(studentId){
+    try{
+      const payments = await  this.model.getStudentPayments(studentId);
+      return payments
+    }catch (e) {
+      return []
+    }
+  }
+
 }
