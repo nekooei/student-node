@@ -89,6 +89,15 @@ class StudentProvider {
       return null
     }
   }
+
+  async getCurrentService(studentId){
+    try{
+      const currentService = await this.model.getCurrentService(studentId, JMoment(Date.now()).format('jYYYYjMMjDD'));
+      return currentService.length ? currentService[0] : {}
+    }catch (e) {
+      return null
+    }
+  }
 }
 
 
