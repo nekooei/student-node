@@ -39,6 +39,12 @@ class PaymentModel extends MyModel{
     })
   }
 
+  getStudentPayments(studentId){
+    return this.runFunction('student', this.name, 'getAll', {
+      args: [studentId]
+    })
+  }
+
 
 
 }
