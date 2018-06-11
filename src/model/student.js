@@ -96,6 +96,12 @@ class StudentModel extends MyModel{
     });
   }
 
+  getCurrentService(studentId, currentDate){
+    return this.runFunction('student', 'service', 'getStudentCurrentService', {
+      args: [studentId, currentDate]
+    })
+  }
+
 
 }
 
