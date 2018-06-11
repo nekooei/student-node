@@ -153,17 +153,6 @@ export default ({config, database}) => {
   });
 
 
-  /*api.post('/requestPaymentToken', authMiddleWare.authenticate, async (req, res) => {
-    try {
-      const paymentProviderInstance = new PaymentProvider(database);
-      const tokenRes = await paymentProviderInstance.createNewPayment(req.body.amount * 10, `${String(Date.now())}-${req.body.amount}-${req.user.id}`);
-      res.send(ResponseGenerator(true, 'Token', tokenRes[0]));
-    } catch (error) {
-      res.send(error);
-    }
-
-  });*/
-
   api.get('/currentService', authMiddleWare.authenticate, async (req, res) => {
     const currentService = await studentProviderInstance.getCurrentService(req.user.id);
     if(currentService !== null){
