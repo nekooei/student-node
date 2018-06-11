@@ -36,7 +36,7 @@ export default class PaymentProvider {
       const payments = await  this.model.getStudentPayments(studentId);
       return payments
     }catch (e) {
-      return []
+      return null
     }
   }
 
