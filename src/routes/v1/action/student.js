@@ -8,9 +8,7 @@ import StudentProvider from "../provider/student";
 import ResponseGenerator from "../../../util/responseGenerator";
 import authMiddleWare from '../../../middleware/authentication';
 import DistanceMatrix from 'google-distance-matrix';
-import GatewayProvider from "../provider/gateway";
 import ImageProvider from "../provider/image";
-import PaymentProvider from "../provider/payment";
 
 const DISTANCE_MATRIX_API_KEY = 'AIzaSyAJRlHVa45YqX-0chPm5Y7JDiaplMIQMOM';
 
