@@ -13,6 +13,13 @@ export default ({config, database}) => {
   const gatewayProviderInstance = new GatewayProvider(database);
   const studentProviderInstance = new StudentProvider(database);
 
+  api.get('/', authMiddleWare.authenticate, async (req, res) => {
+    const payments = await paymentProviderInstance.getPayments(req.user.id);
+    return payments !== null ?
+      res.json(ResponseGenerator(true, 'Payments', payments)) :
+      res.json(ResponseGenerator(false, 'Error in retrieve payments', ''));
+  });
+
   api.post('/init', authMiddleWare.authenticate, async (req, res) => {
     try {
       const gatewayDetail = await gatewayProviderInstance.getById(req.body.gatewayId);
