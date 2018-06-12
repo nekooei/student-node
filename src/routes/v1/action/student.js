@@ -41,7 +41,8 @@ export default ({config, database}) => {
     res.send(ResponseGenerator(true, 'Student Info', studentInfo));
   });
 
-  api.post('/register', BodyParser.registerSchema(), async (req, res) => {
+  // todo : enable body parser after development
+  api.post('/register'/*, BodyParser.registerSchema()*/, async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.send(ResponseGenerator(false, "Validation Error", errors.mapped()));
