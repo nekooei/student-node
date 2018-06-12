@@ -1,13 +1,11 @@
 /**
  * Created by milad on 10/28/17.
  */
+import 'babel-polyfill';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
-import passport from 'passport';
-//import User from './model/user';
-//let localStrategy = require('passport-local').Strategy;
-
+import ResponseGenerator from './util/responseGenerator';
 import config from './config';
 import routes from './routes';
 
@@ -22,16 +20,13 @@ app.use(bodyParser.json({
 }));
 
 
-/*//passport config
-app.use(passport.initialize());
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());*/
-
-
 //api v1 routes
 app.use('/', routes);
-console.log(config.application.port)
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send(ResponseGenerator(false, "Invalid Token."));
+  }
+});
 app.server.listen(config.application.port);
 console.log(`we are listening on port no. ${config.application.port}`);
 

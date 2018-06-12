@@ -3,24 +3,31 @@
   "version": "0.0.1",
   "author": "Milad Nekooei <mi.nekooei@gmail.com>",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon -w src --exec \"babel-node src --preset es2015,stage-0\"",
+    "dev": "NODE_ENV=development_student_api nodemon -w src --exec \"babel-node src --preset es2015,stage-0\"",
     "build": "babel src -s -D -d dist --preset es2015,stage-0",
-    "prepublish": "NODE_ENV=PREPUBLISH pm2 start src -x \"babel-node src --preset ex2015, stage-0\"",
-    "start": "NODE_ENV=production pm2 start dist",
+    "start": "NODE_ENV=production_student_api pm2 start dist --name=\"student api\"",
     "prestart": "npm run -s build",
     "lint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "bcrypt": "^1.0.3",
     "bluebird": "^3.5.1",
     "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "express-jwt": "^5.3.0",
+    "express-validator": "^4.3.0",
+    "google-distance-matrix": "^1.1.1",
+    "jalali-moment": "^3.0.10",
     "jsonwebtoken": "^7.4.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pg-promise": "^7.4.0"
+    "pg-promise": "^7.4.0",
+    "soap": "^0.23.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

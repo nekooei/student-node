@@ -7,42 +7,34 @@ class MyModel {
   constructor({name, database}) {
     this.name = name;
     this.database = database;
-    this.dbPrefix = config.application.applicationDBPrefix;
   }
 
-  runFunction(functionName, {any, arguments, returnArg} = {}) {
-    if (any) {
-      return this.database.db.any(`SELECT * FROM "
-        ${this.dbPrefix}_${this.name}_${functionName}"
-        (${arguments ? arguments.map((arg, index) => `$${index + 1}`) : ''}) ${returnArg ? `AS "${returnArg}"` : ''}`
-        , arguments ? arguments : undefined);
-    }
-    return this.database.db.oneOrNone(`SELECT * FROM "
-        ${this.dbPrefix}_${this.name}_${functionName}"
-        (${arguments ? arguments.map((arg, index) => `$${index + 1}`) : ''}) ${returnArg ? `AS "${returnArg}"` : ''}`
-      , arguments ? arguments : undefined);
+  runFunction(dbPrefix, entityName, functionName, {any, args, returnArg} = {}) {
+      return this.database.db.func(
+        `"${dbPrefix}_${entityName}_${functionName}"`
+        , args ? args : undefined);
   }
 
   getAll() {
-    return this.runFunction('getAll', {
+    return this.runFunction('crm', this.name, 'getAll', {
       any: true
     });
   }
 
   getPage(offset, limit) {
-    return this.runFunction('getPage', {
+    return this.runFunction('crm', this.name, 'getPage', {
       any: true,
-      arguments: [offset, limit]
+      args: [offset, limit]
     });
   }
 
   getById(id) {
-    return this.database.db.one(`SELECT * FROM ${this.name} where id = ${id}`);
+    return this.database.db.one(`SELECT * FROM ${this.name}s where id = ${id}`);
   }
 
   deleteById(id) {
-    return this.runFunction('delete', {
-      arguments: [id],
+    return this.runFunction('crm', this.name,'delete', {
+      args: [id],
       returnArg: 'affectedRows'
     });
   }
